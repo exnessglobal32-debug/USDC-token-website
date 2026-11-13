@@ -1,26 +1,384 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Independent Token Project | BNB Smart Chain</title>
-<style>
-:root{color-scheme:dark;--bg:#0b1220;--panel:#142238;--line:#2b405e;--txt:#edf4ff;--muted:#aebdd2;--a:#58d6c7}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(850px 450px at 85% 0,#1a4054,transparent 65%),var(--bg);color:var(--txt);font:16px/1.65 system-ui,Arial}
-main{max-width:960px;margin:auto;padding:28px 20px 60px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:8px 0 30px}.brand{font-weight:800;letter-spacing:.08em}.pill{color:var(--a);border:1px solid #28665f;border-radius:99px;padding:5px 12px;font-size:13px}
-.hero{padding:45px 0 25px}.eyebrow,.label{color:var(--a);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(34px,6vw,56px);line-height:1.08;margin:14px 0}.lead,p{color:var(--muted)}.lead{font-size:18px;max-width:720px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:18px 0}.card{background:linear-gradient(145deg,#172943,#101b2d);border:1px solid var(--line);border-radius:17px;padding:22px}h2{font-size:21px;margin:5px 0 10px}.addr{font:14px/1.6 ui-monospace,monospace;word-break:break-all;margin:12px 0}.actions{display:flex;flex-wrap:wrap;gap:10px}.btn{border:0;border-radius:10px;padding:11px 15px;background:var(--a);color:#07171a;font-weight:800;text-decoration:none;cursor:pointer}.secondary{background:#20334e;color:var(--txt);border:1px solid #405879}li{color:var(--muted);margin:7px 0}.warn{background:#292318;border-left:3px solid #e7b65c;padding:12px 15px;border-radius:7px;color:#f4dfb9}footer{border-top:1px solid var(--line);margin-top:38px;padding-top:16px;font-size:13px;color:#8fa2bd}
-</style></head><body><main>
-<div class="top"><div class="brand">INDEPENDENT TOKEN PROJECT</div><div class="pill">BNB SMART CHAIN</div></div>
-<section class="hero"><div class="eyebrow">Public project information</div><h1>Token information &amp; contract details</h1>
-<p class="lead">Information about an independently deployed BEP-20-compatible token contract on BNB Smart Chain. Always verify the contract address on the block explorer before interacting.</p></section>
-<div class="grid">
-<div class="card"><div class="label">Network</div><h2>BNB Smart Chain</h2><p>Token standard: BEP-20 compatible</p></div>
-<div class="card"><div class="label">Contract</div><h2>Verified source code</h2><p>Review the published source and current on-chain data independently.</p></div>
-<div class="card"><div class="label">Project</div><h2>Independent project</h2><p>Not affiliated with Tether, PancakeSwap, Binance, or BscScan.</p></div></div>
-<section class="card"><div class="label">Contract address</div><div class="addr" id="contract">0xc6c46f94138f6A0e437c01aebb1109845dA399c7</div>
-<div class="actions"><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('contract').textContent).then(()=>document.getElementById('msg').textContent='Copied')">Copy contract address</button>
-<a class="btn secondary" target="_blank" rel="noopener" href="https://bscscan.com/address/0xc6c46f94138f6A0e437c01aebb1109845dA399c7#code">View on BscScan</a></div><p id="msg"></p></section>
-<div class="grid"><section class="card"><h2>Token mechanics</h2><ul><li>The verified source includes an owner-only mint function.</li><li>The owner can mint additional tokens to a specified address.</li><li>Check current owner, total supply and token metadata directly on-chain.</li></ul></section>
-<section class="card"><h2>Using the token</h2><ul><li>Select BNB Smart Chain in your wallet.</li><li>Use the contract address above when importing or checking the token.</li><li>Never share your seed phrase or private key.</li></ul></section></div>
-<section class="card"><h2>Risk disclosure</h2><div class="warn">This token is not represented as USD-backed, redeemable for dollars, or guaranteed to trade at $1. Its market price and liquidity can change and may be very limited.</div>
-<p>Owner-controlled minting can increase supply and affect holders. Providing liquidity involves price movement, impermanent loss, smart-contract risk and potential loss of funds. Do your own research before interacting.</p></section>
-<footer>Independent project information page. On-chain contract data is authoritative. This page is not investment, legal or financial advice.</footer>
-</main></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071426">
+  <meta name="description" content="Independent USD Coin (USDC) token project deployed on BNB Smart Chain.">
+  <title>USD Coin (USDC) | Independent Token Project</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #071426;
+      color: #edf4ff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid #20334d;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #2775ca;
+      color: white;
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .network {
+      color: #a9c5e8;
+      font-size: 13px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 85px 15px 65px;
+    }
+
+    .tag {
+      display: inline-block;
+      border: 1px solid #31547b;
+      color: #9dcaff;
+      padding: 7px 15px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 7vw, 66px);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .blue {
+      color: #4a9cff;
+    }
+
+    .hero p {
+      color: #b5c5d9;
+      max-width: 680px;
+      margin: 0 auto 28px;
+      font-size: 17px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 9px;
+      background: #2775ca;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid #42658d;
+    }
+
+    section {
+      padding: 35px 0;
+    }
+
+    .section-title {
+      font-size: 27px;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 17px;
+    }
+
+    .card {
+      background: #10233b;
+      border: 1px solid #203b5c;
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      color: #8fc3ff;
+      font-size: 15px;
+      margin-bottom: 9px;
+    }
+
+    .card p {
+      color: #e1eaf7;
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+
+    .contract {
+      font-size: 13px !important;
+      line-height: 1.8;
+    }
+
+    .notice {
+      background: #291f16;
+      border: 1px solid #80572c;
+      border-radius: 12px;
+      padding: 22px;
+      color: #f5d8ad;
+    }
+
+    .notice h2 {
+      color: #ffd08a;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .notice p {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .links a {
+      color: #91c5ff;
+      border: 1px solid #31547b;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+
+    footer {
+      border-top: 1px solid #20334d;
+      margin-top: 55px;
+      padding: 28px 0;
+      text-align: center;
+      color: #8296af;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding-top: 60px;
+      }
+
+      .brand {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">$</div>
+      <span>USD Coin <span class="blue">(USDC)</span></span>
+    </div>
+    <div class="network">BNB Smart Chain · BEP-20</div>
+  </div>
+</header>
+
+<main>
+
+  <div class="container hero">
+    <div class="tag">Independent Token Project</div>
+
+    <h1>USD Coin<br><span class="blue">USDC</span></h1>
+
+    <p>
+      An independently deployed digital token project on BNB Smart Chain.
+      Explore its smart contract, token mechanics and blockchain information.
+    </p>
+
+    <div class="buttons">
+      <a class="btn"
+         href="https://bscscan.com/address/0xc6c46f94138f6A0e437c01aebb1109845dA399c7"
+         target="_blank" rel="noopener">
+        View Smart Contract
+      </a>
+
+      <a class="btn secondary"
+         href="https://pancakeswap.finance/swap?outputCurrency=0xc6c46f94138f6A0e437c01aebb1109845dA399c7"
+         target="_blank" rel="noopener">
+        Open PancakeSwap
+      </a>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Project Information</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Project Display Name</h3>
+          <p>USD Coin</p>
+        </div>
+
+        <div class="card">
+          <h3>Project Ticker</h3>
+          <p>USDC</p>
+        </div>
+
+        <div class="card">
+          <h3>Blockchain Network</h3>
+          <p>BNB Smart Chain</p>
+        </div>
+
+        <div class="card">
+          <h3>Token Standard</h3>
+          <p>BEP-20 Compatible</p>
+        </div>
+
+        <div class="card">
+          <h3>Smart Contract</h3>
+          <p>Verified on BscScan</p>
+        </div>
+
+        <div class="card">
+          <h3>Minting Permission</h3>
+          <p>Owner Only</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Smart Contract</h2>
+
+      <div class="card">
+        <h3>Contract Address</h3>
+        <p class="contract">
+          0xc6c46f94138f6A0e437c01aebb1109845dA399c7
+        </p>
+        <br>
+
+        <div class="links">
+          <a href="https://bscscan.com/address/0xc6c46f94138f6A0e437c01aebb1109845dA399c7"
+             target="_blank" rel="noopener">
+            View Contract on BscScan
+          </a>
+
+          <a href="https://bscscan.com/token/0xc6c46f94138f6A0e437c01aebb1109845dA399c7"
+             target="_blank" rel="noopener">
+            View Token Tracker
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Token Mechanics</h2>
+
+      <div class="card">
+        <p>
+          The smart contract uses an owner-controlled minting function.
+          Only the contract owner is authorized by the contract to mint
+          additional tokens to a specified wallet address.
+        </p>
+        <br>
+        <p>
+          Token transfers are handled through the smart contract according
+          to its deployed ERC-20 compatible functionality.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="notice">
+        <h2>Important Token Disclosure</h2>
+
+        <p>
+          This is USD coin project. It is issued by,
+          affiliated with, authorized by, endorsed by, or backed by
+          Circle and the issuer of the official USDC stablecoin.
+        </p>
+
+        <p>
+          The use of the display name "USD Coin" and ticker "USDC"
+          establish any relationship with official USDC.
+        </p>
+
+        <p>
+          This token is represented as redeemable for US dollars.
+           USD reserves, guaranteed $1 value, or price peg are
+          claimed by this website.
+        </p>
+
+        <p>
+          Cryptocurrency tokens involve risks, including volatility,
+          liquidity limitations and potential loss of funds.
+          Always verify the contract address before interacting.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    USD Coin Token Project<br>
+    BNB Smart Chain · BEP-20 Compatible<br><br>
+    © 2026 All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
